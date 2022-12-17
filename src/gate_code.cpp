@@ -1,15 +1,18 @@
 #include <SPI.h>
 #include <MFRC522.h>
 #include <Servo.h>
+#include <Wire.h> 
+#include <LiquidCrystal_I2C.h>
  
 #define SS_PIN 10
 #define RST_PIN 9
 #define LED_R 4 //define red LED pin 
 #define LED_B 5 //define blue LED
 #define BUZZER 2 //buzzer pin
+
 MFRC522 mfrc522(SS_PIN, RST_PIN);   // Create MFRC522 instance.
 Servo myServo; //define servo name
-
+LiquidCrystal_I2C lcd(0x27,16,2); 
 int ir = 7;
  
 void setup() 
@@ -26,6 +29,14 @@ void setup()
   noTone(BUZZER);
   Serial.println("Put your card to the reader...");
   Serial.println();
+
+  // LCD
+  lcd.begin();                  
+  lcd.backlight();
+  lcd.setCursor(2,0);
+  lcd.print("Welcome To");
+  lcd.setCursor(0,1);
+  lcd.print("Da Nang Parking");
 
 }
 void loop() 
@@ -46,10 +57,10 @@ void loop()
   byte letter;
   for (byte i = 0; i < mfrc522.uid.size; i++) 
   {
-    Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
-    Serial.print(mfrc522.uid.uidByte[i], DEC);
-    content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
-    content.concat(String(mfrc522.uid.uidByte[i], DEC));
+     Serial.print(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " ");
+     Serial.print(mfrc522.uid.uidByte[i], DEC);
+     content.concat(String(mfrc522.uid.uidByte[i] < 0x10 ? " 0" : " "));
+     content.concat(String(mfrc522.uid.uidByte[i], DEC));
   }
   Serial.println();
   Serial.print("Message : ");
@@ -69,7 +80,8 @@ void loop()
       delay(2500);
       if (digitalRead(ir) == HIGH)
       {
-        myServo.write(0);
+        //Open the gate
+         myServo.write(0);
         Serial.println("Gate Closed");
         Serial.println();
         digitalWrite(LED_R, LOW);
