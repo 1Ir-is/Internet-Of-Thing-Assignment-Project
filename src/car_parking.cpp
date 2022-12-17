@@ -17,7 +17,7 @@ String sensor4;
 String sensor5;
 String sensor6;
 
-String cdata =””; // complete data, consisting of sensors values
+String cdata =""; // complete data, consisting of sensors values
 
 void setup()
 {
@@ -44,11 +44,11 @@ void loop()
   p2slot2();
   p2slot3();
 
-  cdata = cdata + sensor1 +”,” + sensor2 + “,”+ sensor3 +”,”+ sensor4 + “,” + sensor5 + “,” + sensor6 +”,”; // comma will be used a delimeter
+  cdata = cdata + sensor1 +"," + sensor2 + ","+ sensor3 +","+ sensor4 + "," + sensor5 + "," + sensor6 +","; // comma will be used a delimeter
   Serial.println(cdata);
   nodemcu.println(cdata);
   delay(6000); // 100 milli seconds
-  cdata = “”;
+  cdata = "";
   digitalWrite(parking1_slot1_ir_s, HIGH);
   digitalWrite(parking1_slot2_ir_s, HIGH);
   digitalWrite(parking1_slot3_ir_s, HIGH);
@@ -62,12 +62,12 @@ void p1slot1() // parkng 1 slot1
 {
   if(digitalRead(parking1_slot1_ir_s) == LOW)
   {
-    sensor1 = “255”;
+    sensor1 = "255";
     delay(200);
   }
   if(digitalRead(parking1_slot1_ir_s) == HIGH)
   {
-    sensor1 = “0”;
+    sensor1 = "0"; 
     delay(200);
   }
 }
@@ -76,12 +76,12 @@ void p1slot2() // parking 1 slot2
 {
   if(digitalRead(parking1_slot2_ir_s) == LOW)
   {
-    sensor2 = “255”;
+    sensor2 = "255";
     delay(200);
   }
   if(digitalRead(parking1_slot2_ir_s) == HIGH)
   {
-    sensor2 = “0”;
+    sensor2 = "0";
     delay(200);
   }
 }
@@ -90,12 +90,12 @@ void p1slot3() // parking 1 slot3
 {
   if(digitalRead(parking1_slot3_ir_s) == LOW)
   {
-    sensor3 = “255”;
+    sensor3 = "255";
     delay(200);
   }
   if(digitalRead(parking1_slot3_ir_s) == HIGH)
   {
-    sensor3 = “0”;
+    sensor3 = "0";
     delay(200);
   }
 }
@@ -106,12 +106,12 @@ void p2slot1() // parking 1 slot3
 {
   if(digitalRead(parking2_slot1_ir_s) == LOW)
   {
-    sensor4 = “255”;
+    sensor4 = "255";
     delay(200);
   }
   if(digitalRead(parking2_slot1_ir_s) == HIGH)
   {
-    sensor4 = “0”;
+    sensor4 = "0";
     delay(200);
   }
 }
@@ -120,12 +120,12 @@ void p2slot2() // parking 1 slot3
 {
   if(digitalRead(parking2_slot2_ir_s) == LOW)
   {
-    sensor5 = “255”;
+    sensor5 = "255";
     delay(200);
   }
   if(digitalRead(parking2_slot2_ir_s) == HIGH)
   {
-    sensor5 = “0”;
+    sensor5 = "0";
     delay(200);
   }
 }
@@ -134,12 +134,12 @@ void p2slot3() // parking 1 slot3
 {
   if(digitalRead(parking2_slot3_ir_s) == LOW)
   {
-    sensor6 = “255”;
+    sensor6 = "255";
     delay(200);
   }
   if(digitalRead(parking2_slot3_ir_s) == HIGH)
   {
-    sensor6 = “0”;
+    sensor6 = "0";
     delay(200);
   }
 }
