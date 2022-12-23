@@ -23,7 +23,7 @@ String myString; // complete message from arduino, which consists of sensors dat
 char rdata; // received characters
 
 int firstVal, secondVal,thirdVal; // sensors 
-int led1,led2,led3,led4,led5,led6;
+int led1,led2,led3,led4;
 // This function sends Arduino's up time every second to Virtual Pin (1).
 // In the app, Widget's reading frequency should be set to PUSH. This means
 // that you define how often to send data to Blynk App.
@@ -66,10 +66,6 @@ void setup()
   timer.setInterval(1000L,sensorvalue2); 
   timer.setInterval(1000L,sensorvalue3);
   timer.setInterval(1000L,sensorvalue4);
-  timer.setInterval(1000L,sensorvalue5);
-  timer.setInterval(1000L,sensorvalue6);
-  
-
 
   // firebase
   WiFi.begin(ssid, pass);
@@ -127,17 +123,12 @@ void loop()
       String m = getValue(myString, ',', 1);
       String n = getValue(myString, ',', 2);
       String o = getValue(myString, ',', 3);
-      String p = getValue(myString, ',', 4);
-      String q = getValue(myString, ',', 5);
-
 
       // these leds represents the leds used in Blynk application
       led1 = l.toInt();
       led2 = m.toInt();
       led3 = n.toInt();
       led4 = o.toInt();
-      led5 = p.toInt();
-      led6 = q.toInt();
 
         myString = "";
       // end new code
@@ -161,9 +152,6 @@ void loop()
       String m = getValue(myString, ',', 1);
       String n = getValue(myString, ',', 2);
       String o = getValue(myString, ',', 3);
-      String p = getValue(myString, ',', 4);
-      String q = getValue(myString, ',', 5);
-
 
       // these leds represents the leds used in Blynk application
       Firebase.RTDB.setInt(&control_data, "SLOT 1 is actived", led1);
@@ -174,8 +162,6 @@ void loop()
       // led2 = m.toInt();
       // led3 = n.toInt();
       // led4 = o.toInt();
-      // led5 = p.toInt();
-      // led6 = q.toInt();
 
         myString = "";
       // end new code
@@ -217,25 +203,6 @@ void sensorvalue4()
   Blynk.virtualWrite(V13, sdata);
 
 }
-
-void sensorvalue5()
-{
-  int sdata = led5;
-  // You can send any value at any time.
-  // Please don't send more that 10 values per second.
-  Blynk.virtualWrite(V14, sdata);
-
-}
-
-void sensorvalue6()
-{
-  int sdata = led6;
-  // You can send any value at any time.
-  // Please don't send more that 10 values per second.
-  Blynk.virtualWrite(V15, sdata);
-
-}
-
 
 String getValue(String data, char separator, int index)
 {
